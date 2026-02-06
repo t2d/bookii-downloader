@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run shellcheck
+        run: shellcheck fetch_bookii_books.sh test_fetch.sh
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Make scripts executable
+        run: chmod +x fetch_bookii_books.sh test_fetch.sh
+
+      - name: Run test suite
+        run: ./test_fetch.sh
+
+  test-macos:
+    name: Run Tests (macOS)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Make scripts executable
+        run: chmod +x fetch_bookii_books.sh test_fetch.sh
+
+      - name: Run test suite
+        run: ./test_fetch.sh

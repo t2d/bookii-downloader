@@ -1,0 +1,24 @@
+# Ignore macOS files
+.DS_Store
+
+# Ignore editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Ignore test artifacts
+/tmp/
+
+# Ignore downloaded books (if testing locally)
+book/
+configure/
+
+# Ignore mitmproxy captures
+captures/
+*.mitm
+
+# Ignore backup files
+*.backup
+*.bak
